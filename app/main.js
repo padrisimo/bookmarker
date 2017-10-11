@@ -12,6 +12,10 @@ app.on('ready', ()=>{
     mainWindow.once('ready-to-show', () => {
         mainWindow.show();
     });
+
+    mainWindow.on('closed', () =>  {
+        mainWindow = null;
+    });
     
     mainWindow.loadURL(`file://${__dirname}/index.html`)
 });
