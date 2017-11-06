@@ -1,6 +1,6 @@
 # Bookmarker
 
-A simple bookmarker application using Electron, just for training fem.
+A simple bookmarker application using Electron, training project for fun.
 
 ## After cloning
 
