@@ -1,18 +1,24 @@
- const newLinkSubmit = document.querySelector('.new-link-form--submit');
- const newLinkForm = document.querySelector('.new-link-form');
- const newLinkUrl = document.querySelector('#new-link-url');
+const newLinkUrl = document.querySelector('#new-link-url');
+const newLinkSubmit = document.querySelector('.new-link-form--submit');
+const newLinkForm = document.querySelector('.new-link-form');
 
- newLinkUrl.addEventListener('keyup', () =>{
+newLinkUrl.addEventListener('keyup', () =>{
      newLinkSubmit.disabled = !newLinkUrl.validity.valid;
- });
- 
- newLinkForm.addEventListener('submit', () =>{
+});
+
+const parser = new DOMParser();
+const parseResponse = (text) => parser.parseFromString(text, 'text/html');
+const findTitle = (nodes) => nodes.querySelector('title').textContent;
+
+newLinkForm.addEventListener('submit', () =>{
      event.preventDefault();
 
      const url = newLinkUrl.value;
 
      fetch(url)
         .then(response => response.text())
-        .then(response => console.log(response))
-        .catch(error => console.error(error))
- });
+        .then(parseResponse)
+        .then(findTitle)
+        .then(title => console.log(title))
+        .catch(error => console.error(error));
+});
